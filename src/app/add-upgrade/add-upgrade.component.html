@@ -1,0 +1,31 @@
+
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <mat-card class="upgrade-card">
+    <mat-card-title>
+      Add an upgrade
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <input disabled matInput placeholder="Select the date..." [(ngModel)]="upgrade.date" name="date" [matDatepicker]="date">
+        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+        <mat-datepicker disabled="false" #date></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea placeholder="Enter upgrade type..." rows="1" maxlength="300" matInput [(ngModel)]="upgrade.type" name="upgradeType"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea placeholder="Enter upgrade name..." rows="1" maxlength="300" matInput [(ngModel)]="upgrade.name" name="upgradeName"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea placeholder="Enter upgrade level..." rows="1" maxlength="300" matInput [(ngModel)]="upgrade.level" name="upgradeLevel"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea placeholder="Enter upgrade amount..." rows="1" maxlength="300" matInput [(ngModel)]="upgrade.amount" name="upgradeAmount"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button type="submit">Save me!</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+<pre> {{ upgrade | json }} </pre>
