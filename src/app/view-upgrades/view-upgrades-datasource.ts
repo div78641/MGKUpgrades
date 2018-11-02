@@ -5,33 +5,13 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface ViewUpgradesItem {
+  date: Date;
+  type: string;
   name: string;
-  id: number;
+  level: number;
+  amount: number;
+  completed: boolean;
 }
-
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: ViewUpgradesItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
 
 /**
  * Data source for the ViewUpgrades view. This class should
@@ -39,7 +19,7 @@ const EXAMPLE_DATA: ViewUpgradesItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class ViewUpgradesDataSource extends DataSource<ViewUpgradesItem> {
-  data: ViewUpgradesItem[] = EXAMPLE_DATA;
+  data: ViewUpgradesItem[] = [];
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
@@ -94,8 +74,11 @@ export class ViewUpgradesDataSource extends DataSource<ViewUpgradesItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
+        case 'date': return compare(a.date, b.date, isAsc);
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'type': return compare(+a.type, +b.type, isAsc);
+        case 'amount': return compare(+a.amount, +b.amount, isAsc);
+        case 'level': return compare(+a.level, +b.level, isAsc);
         default: return 0;
       }
     });
