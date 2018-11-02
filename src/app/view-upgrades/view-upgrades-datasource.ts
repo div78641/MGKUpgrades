@@ -10,7 +10,6 @@ export interface ViewUpgradesItem {
   name: string;
   level: number;
   amount: number;
-  completed: boolean;
 }
 
 /**
