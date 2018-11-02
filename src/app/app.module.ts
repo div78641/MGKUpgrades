@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MgkNavComponent } from './mgk-nav/mgk-nav.component';
@@ -12,7 +14,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule } from '@angular/material';
 import { MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
-
 
 import { AddUpgradeComponent } from './add-upgrade/add-upgrade.component';
 import { ViewUpgradesComponent } from './view-upgrades/view-upgrades.component';
@@ -29,6 +30,8 @@ import { ViewUpgradesComponent } from './view-upgrades/view-upgrades.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     LayoutModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

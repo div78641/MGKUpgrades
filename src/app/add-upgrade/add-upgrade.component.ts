@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-add-upgrade',
@@ -9,12 +10,17 @@ export class AddUpgradeComponent implements OnInit {
 
   upgrade: any = {};
 
-  constructor() { }
+  constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log(this.upgrade);
+    this.upgrade.date = new Date(this.upgrade.date).valueOf();
+    this.db.list('upgrades').push(this.upgrade)
+      .then(_ => {
+        this.upgrade = {};
+        console.log('success');
+      });
   }
 }
