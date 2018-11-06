@@ -8,8 +8,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AddUpgradeComponent implements OnInit {
 
-  upgrade: any = {};
-
+  upgrade: any = { date: new Date()};
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
