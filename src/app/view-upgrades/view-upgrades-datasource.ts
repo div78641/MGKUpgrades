@@ -3,7 +3,6 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
-// TODO: Replace this with your own data model type
 export interface ViewUpgradesItem {
   date: Date;
   type: string;
@@ -75,7 +74,7 @@ export class ViewUpgradesDataSource extends DataSource<ViewUpgradesItem> {
       switch (this.sort.active) {
         case 'date': return compare(a.date, b.date, isAsc);
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'type': return compare(+a.type, +b.type, isAsc);
+        case 'type': return compare(a.type, b.type, isAsc);
         case 'amount': return compare(+a.amount, +b.amount, isAsc);
         case 'level': return compare(+a.level, +b.level, isAsc);
         default: return 0;
