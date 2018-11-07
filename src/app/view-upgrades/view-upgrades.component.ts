@@ -16,7 +16,7 @@ export class ViewUpgradesComponent implements OnInit, OnDestroy {
   dataSource: ViewUpgradesDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['date', 'type', 'name', 'level', 'amount'];
+  displayedColumns = ['date', 'type', 'name', 'level', 'amount', 'action'];
   subscription: Subscription;
 
   constructor(private db: AngularFireDatabase) {}
