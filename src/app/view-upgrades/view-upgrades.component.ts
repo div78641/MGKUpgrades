@@ -32,4 +32,25 @@ export class ViewUpgradesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  deleteUpgrade(rowItem) {
+    console.log(rowItem);
+    const tempDb = this.db.database.ref();
+    const query = this.db.database.ref('upgrades').orderByKey();
+    query.once('value')
+      .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        const pkey = childSnapshot.key;
+        const chval = childSnapshot.val();
+
+        // check if remove this child
+        if (chval.type === rowItem.type && chval.name === rowItem.name
+            && chval.level === rowItem.level && chval.amount === rowItem.amount) {
+          tempDb.child('upgrades/' + pkey).remove();
+          return true;
+        }
+      });
+    });
+
+  }
 }

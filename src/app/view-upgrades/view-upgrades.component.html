@@ -34,7 +34,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let row">
-        <button mat-button (click)="deleteUpgrade(row.member_id)"><mat-icon class="trashCan">delete_forever</mat-icon></button>
+        <button mat-button (click)="deleteUpgrade(row)"><mat-icon class="trashCan">delete_forever</mat-icon></button>
       </td>
     </ng-container>
 
