@@ -3,7 +3,6 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { ViewUpgradesDataSource, ViewUpgradesItem } from './view-upgrades-datasource';
 import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-upgrades',
@@ -22,7 +21,7 @@ export class ViewUpgradesComponent implements OnInit, OnDestroy {
   constructor(private db: AngularFireDatabase) {}
 
   ngOnInit() {
-    this.subscription = this.db.list<ViewUpgradesItem>('upgrades').valueChanges().pipe(first()).subscribe(d => {
+    this.subscription = this.db.list<ViewUpgradesItem>('upgrades').valueChanges().subscribe(d => {
       console.log('data streaming');
       this.dataSource = new ViewUpgradesDataSource(this.paginator, this.sort);
       this.dataSource.data = d;
@@ -39,18 +38,17 @@ export class ViewUpgradesComponent implements OnInit, OnDestroy {
     const query = this.db.database.ref('upgrades').orderByKey();
     query.once('value')
       .then(function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        const pkey = childSnapshot.key;
-        const chval = childSnapshot.val();
+        snapshot.forEach(function(childSnapshot) {
+          const pkey = childSnapshot.key;
+          const chval = childSnapshot.val();
 
-        // check if remove this child
-        if (chval.type === rowItem.type && chval.name === rowItem.name
-            && chval.level === rowItem.level && chval.amount === rowItem.amount) {
-          tempDb.child('upgrades/' + pkey).remove();
-          return true;
-        }
+          // check if remove this child
+          if (chval.type === rowItem.type && chval.name === rowItem.name
+              && chval.level === rowItem.level && chval.amount === rowItem.amount) {
+            tempDb.child('upgrades/' + pkey).remove();
+            return true;
+          }
+        });
       });
-    });
-
   }
 }
