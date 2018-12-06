@@ -18,7 +18,7 @@ export class AddUpgradeComponent implements OnInit {
     this.upgrade.date = new Date(this.upgrade.date).valueOf();
     this.db.list('upgrades').push(this.upgrade)
       .then(_ => {
-        this.upgrade = {};
+        this.upgrade = { date: new Date() };
         console.log('success');
       });
   }
